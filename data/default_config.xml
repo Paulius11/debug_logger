@@ -1,0 +1,21 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Default setting to enable debug logging -->
+        <record id="param_debug_logger_enable" model="ir.config_parameter">
+            <field name="key">debug_logger.enable</field>
+            <field name="value">True</field>
+        </record>
+
+        <!-- Default setting to log only 'create' and 'write' methods -->
+        <record id="param_debug_logger_methods" model="ir.config_parameter">
+            <field name="key">debug_logger.methods</field>
+            <field name="value">create</field>
+        </record>
+
+        <!-- Default setting to log all models -->
+        <record id="param_debug_logger_models" model="ir.config_parameter">
+            <field name="key">debug_logger.models</field>
+            <field name="value">all</field>
+        </record>
+    </data>
+</odoo>
