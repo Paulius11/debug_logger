@@ -1,3 +1,3 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-debug_logger.access_debug_logger_settings,access_debug_logger_settings,debug_logger.model_debug_logger_settings,base.group_user,1,1,1
-debug_logger.access_debug_logger_methods,access_debug_logger_methods,debug_logger.model_debug_logger_methods,base.group_user,1,1,1,1
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_debug_logger_settings_manager,debug_logger_settings_manager,model_debug_logger_settings,base.group_system,1,1,1,1
+access_debug_logger_entry,access_debug_logger_entry,model_debug_logger_entry,base.group_system,1,1,1,1

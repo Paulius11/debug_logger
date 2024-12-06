@@ -1,24 +1,59 @@
-# Debug Logger for Odoo
+A powerful debugging tool for Odoo that logs database operations and helps track down issues in your custom modules.
 
-A powerful and configurable logging module for Odoo, designed to enhance debugging by logging database operations (`create`, `write`, `unlink`, `search`) with fine-grained control over methods and models. Easily enable or disable logging, select specific models, and choose methods via the Odoo interface under **Settings > Technical**. Ideal for developers and administrators who need better insights into system behavior during development or production.
+## 🚀 Features
 
----
+- Log database operations (create, write, unlink, search, search_read)
+- Configure logging per model
+- Store log entries in the database for later analysis
+- Automatic cleanup of old log entries
+- User-friendly interface for managing logging configurations
+- Real-time logging to Odoo server logs
+- Thread-safe implementation with recursion prevention
 
-## Features
+## 🔧 Installation
 
-This repository contains a fully configurable Odoo module that makes it easier to track model changes and debug issues by logging key database operations. The module allows users to:
+1. Clone this repository into your Odoo addons directory:
 
-- **Enable/Disable** logging through a boolean switch.
-- **Select specific methods** to log (e.g., `create`, `write`, `unlink`, `search`).
-- **Choose specific models** or log all models.
+2. Update your Odoo configuration file to include the path to the module:
+```conf
+addons_path = /path/to/odoo/addons,/path/to/odoo/custom/addons
+```
 
-### Configuration
+3. Restart your Odoo server
+4. Go to Apps and install "Debug Logger"
 
-- Access the debub parameters via the **Odoo UI** under **Settings > Technical > System Configuration**.
+## 🎯 Usage
 
----
+### Basic Configuration
 
-## Benefits
+1. Go to Debug Tools → Logger Settings
+2. Create a new configuration or use the default one
+3. Configure which operations to log:
+   - Create operations
+   - Write operations
+   - Delete operations
+   - Search operations
+   - Search Read operations
+4. Select specific models to log or leave empty to log all models
+5. Enable/disable storing of log entries
+6. Set maximum number of entries to keep if storage is enabled
 
-- Gain **better visibility** into Odoo's internal operations.
-- Simplify **troubleshooting** during module development or system testing.
+### Viewing Logs
+
+#### Server Logs
+Logs are written to the standard Odoo log file with the INFO level:
+```
+[CREATE] on res.partner
+vals_list: [{'name': 'Test Partner', 'email': 'test@example.com'}]
+```
+
+#### Stored Logs
+If storage is enabled:
+1. Go to Debug Tools → Log Entries
+2. Use filters and group by options to analyze the logs
+3. Click on individual entries to see detailed information
+
+
+## 🔒 Security
+
+The module is accessible only to users in the System Administration group (base.group_system) to ensure sensitive debugging information remains protected.

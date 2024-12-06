@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Action -->
+    <record id="action_debug_logger_entries" model="ir.actions.act_window">
+        <field name="name">Debug Log Entries</field>
+        <field name="res_model">debug.logger.entry</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem 
+        id="menu_debug_logger_entries"
+        name="Log Entries"
+        parent="menu_debug_logger"
+        action="action_debug_logger_entries"
+        sequence="10"/>
+
+    <!-- Tree View -->
+    <record id="view_debug_logger_entry_tree" model="ir.ui.view">
+        <field name="name">debug.logger.entry.tree</field>
+        <field name="model">debug.logger.entry</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="create_date"/>
+                <field name="name"/>
+                <field name="model"/>
+                <field name="data"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_debug_logger_entry_form" model="ir.ui.view">
+        <field name="name">debug.logger.entry.form</field>
+        <field name="model">debug.logger.entry</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="model"/>
+                            <field name="user_id"/>
+                            <field name="create_date"/>
+                        </group>
+                        <group>
+                            <field name="data"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_debug_logger_entry_search" model="ir.ui.view">
+        <field name="name">debug.logger.entry.search</field>
+        <field name="model">debug.logger.entry</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="model"/>
+                <field name="user_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Operation" name="group_by_operation" context="{'group_by': 'name'}"/>
+                    <filter string="Model" name="group_by_model" context="{'group_by': 'model'}"/>
+                    <filter string="User" name="group_by_user" context="{'group_by': 'user_id'}"/>
+                    <filter string="Date" name="group_by_date" context="{'group_by': 'create_date:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

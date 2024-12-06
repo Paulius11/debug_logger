@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Action -->
+    <record id="action_debug_logger_settings" model="ir.actions.act_window">
+        <field name="name">Debug Logger Settings</field>
+        <field name="res_model">debug.logger.settings</field>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first logging configuration
+            </p>
+            <p>
+                Configure which operations and models to log for debugging purposes.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem 
+        id="menu_debug_logger"
+        name="Debug Tools"
+        sequence="10"
+        groups="base.group_system"/>
+    
+    <menuitem 
+        id="menu_debug_logger_settings"
+        name="Logger Settings"
+        parent="menu_debug_logger"
+        action="action_debug_logger_settings"
+        sequence="20"/>
+
+    <!-- Tree View -->
+    <record id="view_debug_logger_settings_tree" model="ir.ui.view">
+        <field name="name">debug.logger.settings.tree</field>
+        <field name="model">debug.logger.settings</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="active"  readonly="1" widget="boolean_toggle"/>
+                <field name="enable_logging"/>
+                <field name="store_entries"/>
+                <field name="log_create"/>
+                <field name="log_write"/>
+                <field name="log_unlink"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_debug_logger_settings_form" model="ir.ui.view">
+        <field name="name">debug.logger.settings.form</field>
+        <field name="model">debug.logger.settings</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button 
+                        name="activate_configuration" 
+                        string="Activate" 
+                        type="object" 
+                        class="oe_highlight"
+                        invisible="active"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="Configuration Name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="active" readonly="1" widget="boolean_toggle"/>
+                            <field name="enable_logging" widget="boolean_toggle"/>
+                            <field name="store_entries" widget="boolean_toggle"/>
+                            <field name="max_entries" 
+                                   invisible="not store_entries"
+                                   required="store_entries"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Methods to Log" name="methods">
+                            <group>
+                                <field name="log_create"/>
+                                <field name="log_write"/>
+                                <field name="log_unlink"/>
+                                <field name="log_search"/>
+                                <field name="log_search_read"/>
+                            </group>
+                        </page>
+                        <page string="Models" name="models">
+                            <field name="model_ids" widget="many2many_tags"/>
+                            <div class="text-muted">
+                                Leave empty to log all models. Select specific models to restrict logging.
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_debug_logger_settings_search" model="ir.ui.view">
+        <field name="name">debug.logger.settings.search</field>
+        <field name="model">debug.logger.settings</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <separator/>
+                <filter string="Logging Enabled" name="logging_enabled" domain="[('enable_logging', '=', True)]"/>
+                <filter string="Storing Entries" name="storing_entries" domain="[('store_entries', '=', True)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Active Status" name="group_by_active" context="{'group_by': 'active'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>
