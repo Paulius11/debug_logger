@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Debug Logger</title>
+    </head>
+    <body>
+        <div>
+            <h1 class="text-center">Debug Logger</h1>
+            <h3 class="text-center">Version 17.0.1.0.0</h3>
+            <p class="text-center">
+                This module is designed for Odoo Community Edition, providing advanced debugging capabilities and comprehensive logging of database operations to help developers track and troubleshoot issues efficiently.
+            </p>
+            <h3>Features:</h3>
+            <ul class="list-unstyled p-0">
+                <li class="mb-4">
+                    Configure logging settings through a user-friendly interface. Choose which operations to track and specify models to monitor.
+                </li>
+                <li class="mb-4">
+                    View and analyze stored log entries with detailed information about each operation, including the user who performed it and complete operation data.
+                </li>
+                <li class="mb-4">
+                    Track various database operations including create, write, unlink, search, and search_read operations with comprehensive data capture.
+                </li>
+                <li class="mb-4">
+                    Manage log storage with automatic cleanup features to maintain system performance while keeping important debugging information.
+                </li>
+            </ul>
+
+            <div class="mb-4">
+                <h3>Technical Features:</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">Thread-safe implementation with recursion prevention</li>
+                    <li class="list-group-item">Configurable per-model logging</li>
+                    <li class="list-group-item">Automatic cleanup of old log entries</li>
+                    <li class="list-group-item">Custom method tracking support</li>
+                    <li class="list-group-item">Detailed operation data storage</li>
+                </ul>
+            </div>
+
+            <div class="mb-4">
+                <h3>Benefits:</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">Faster debugging and issue resolution</li>
+                    <li class="list-group-item">Enhanced development workflow</li>
+                    <li class="list-group-item">Better understanding of data flow</li>
+                    <li class="list-group-item">Improved system monitoring</li>
+                </ul>
+            </div>
+
+            <div class="alert alert-info">
+                <h4>Configuration</h4>
+                <p>After installation, access Debug Tools → Logger Settings to configure:</p>
+                <ul>
+                    <li>Operations to log (create, write, unlink, search)</li>
+                    <li>Models to monitor</li>
+                    <li>Storage settings and cleanup rules</li>
+                    <li>Logging activation/deactivation</li>
+                </ul>
+            </div>
+
+            <div class="alert alert-warning">
+                <h4>Note</h4>
+                <p>This module is designed for development and debugging purposes. Consider the performance impact when enabling extensive logging in production environments.</p>
+            </div>
+        </div>
+    </body>
+</html>

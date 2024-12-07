@@ -1,7 +1,8 @@
 {
     'name': 'Debug Logger',
-    'version': '1.0',
+    'version': '1.1',
     'category': 'Tools',
+    "website": "https://github.com/Paulius11/debug_logger",
     'summary': 'A module to log database operations for debugging',
     'author': 'Paulius11',
     'depends': ['base'],
