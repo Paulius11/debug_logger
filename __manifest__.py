@@ -3,7 +3,7 @@
     'version': '1.0',
     'category': 'Tools',
     'summary': 'A module to log database operations for debugging',
-    'author': 'Your Company',
+    'author': 'Paulius11',
     'depends': ['base'],
     "data": [
         "data/default_config.xml",
