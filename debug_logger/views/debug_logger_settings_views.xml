@@ -37,9 +37,10 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
-                <field name="active"  readonly="1" widget="boolean_toggle"/>
-                <field name="enable_logging"/>
-                <field name="store_entries"/>
+                <field name="active" readonly="1" widget="boolean_toggle"/>
+                <field name="enable_logging" widget="boolean_toggle"/>
+                <field name="store_entries" widget="boolean_toggle"/>
+                <field name="entry_count" string="Entries"/>
                 <field name="log_create"/>
                 <field name="log_write"/>
                 <field name="log_unlink"/>
@@ -62,6 +63,15 @@
                         invisible="active"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_log_entries" 
+                                type="object" 
+                                class="oe_stat_button" 
+                                icon="fa-list"
+                                invisible="not store_entries">
+                            <field name="entry_count" widget="statinfo" string="Log Entries"/>
+                        </button>
+                    </div>
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only"/>
                         <h1><field name="name" placeholder="Configuration Name"/></h1>
@@ -79,16 +89,20 @@
                     <notebook>
                         <page string="Methods to Log" name="methods">
                             <group>
-                                <field name="log_create"/>
-                                <field name="log_write"/>
-                                <field name="log_unlink"/>
-                                <field name="log_search"/>
-                                <field name="log_search_read"/>
+                                <group>
+                                    <field name="log_create"/>
+                                    <field name="log_write"/>
+                                    <field name="log_unlink"/>
+                                </group>
+                                <group>
+                                    <field name="log_search"/>
+                                    <field name="log_search_read"/>
+                                </group>
                             </group>
                         </page>
                         <page string="Models" name="models">
                             <field name="model_ids" widget="many2many_tags"/>
-                            <div class="text-muted">
+                            <div class="text-muted mt8">
                                 Leave empty to log all models. Select specific models to restrict logging.
                             </div>
                         </page>

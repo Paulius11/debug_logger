@@ -5,6 +5,7 @@
         <field name="name">Debug Log Entries</field>
         <field name="res_model">debug.logger.entry</field>
         <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_recent': 1}</field>
     </record>
 
     <!-- Menu -->
@@ -20,11 +21,13 @@
         <field name="name">debug.logger.entry.tree</field>
         <field name="model">debug.logger.entry</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree default_order="create_date desc">
                 <field name="create_date"/>
                 <field name="name"/>
                 <field name="model"/>
-                <field name="data"/>
+                <field name="user_id"/>
+                <field name="caller_info"/>
+                <field name="data" optional="hide"/>
             </tree>
         </field>
     </record>
@@ -44,8 +47,11 @@
                             <field name="create_date"/>
                         </group>
                         <group>
-                            <field name="data"/>
+                            <field name="caller_info"/>
                         </group>
+                    </group>
+                    <group string="Operation Data">
+                        <field name="data" nolabel="1" widget="text"/>
                     </group>
                 </sheet>
             </form>
@@ -61,6 +67,15 @@
                 <field name="name"/>
                 <field name="model"/>
                 <field name="user_id"/>
+                <field name="caller_info"/>
+                <filter string="Recent (Last 24h)" name="recent" 
+                        domain="[('create_date', '>=', (context_today() - datetime.timedelta(days=1)).strftime('%Y-%m-%d'))]"/>
+                <filter string="Today" name="today" 
+                        domain="[('create_date', '>=', context_today().strftime('%Y-%m-%d'))]"/>
+                <separator/>
+                <filter string="Create Operations" name="create_ops" domain="[('name', '=', 'CREATE')]"/>
+                <filter string="Write Operations" name="write_ops" domain="[('name', '=', 'WRITE')]"/>
+                <filter string="Delete Operations" name="delete_ops" domain="[('name', '=', 'UNLINK')]"/>
                 <group expand="0" string="Group By">
                     <filter string="Operation" name="group_by_operation" context="{'group_by': 'name'}"/>
                     <filter string="Model" name="group_by_model" context="{'group_by': 'model'}"/>
