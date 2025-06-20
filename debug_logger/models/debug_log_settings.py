@@ -12,6 +12,7 @@ class DebugLoggerSettings(models.Model):
                                help='Older entries will be automatically deleted')
     model_ids = fields.Many2many('ir.model', string='Models to Log',
                                 help="Select models to log. If none selected, all models will be logged.")
+    entry_count = fields.Integer(string='Log Entries Count', compute='_compute_entry_count')
     
     # Method selection fields
     log_create = fields.Boolean(string='Log Create Operations', default=True)
@@ -50,3 +51,17 @@ class DebugLoggerSettings(models.Model):
             'search_read': 'log_search_read',
         }
         return method_name in method_mapping and getattr(self, method_mapping[method_name])
+
+    @api.depends('store_entries')
+    def _compute_entry_count(self):
+        """Compute the number of log entries"""
+        for record in self:
+            if record.store_entries:
+                record.entry_count = self.env['debug.logger.entry'].search_count([])
+            else:
+                record.entry_count = 0
+
+    def action_view_log_entries(self):
+        """Action to view log entries"""
+        action = self.env.ref('debug_logger.action_debug_logger_entries').read()[0]
+        return action
